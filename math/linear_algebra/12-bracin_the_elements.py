@@ -1,22 +1,15 @@
 #!/usr/bin/env python3
-"""Performs element-wise operations on two matrices or a matrix and a scalar."""
-
-import numpy as np
+"""Performs element-wise operations on two matrices."""
 
 def np_elementwise(mat1, mat2):
     """
-    Performs element-wise addition, subtraction, multiplication, and division
-    on two matrices or a matrix and a scalar.
+    Performs element-wise addition, subtraction, multiplication, and division.
 
     Args:
-        mat1 (np.ndarray): First input matrix or scalar-compatible array.
-        mat2 (np.ndarray or scalar): Second input matrix or scalar.
+        mat1: A NumPy ndarray.
+        mat2: A NumPy ndarray or scalar.
 
     Returns:
-        tuple: Contains 4 np.ndarrays:
-            - element-wise sum
-            - element-wise difference
-            - element-wise product
-            - element-wise quotient
+        tuple: (add, subtract, multiply, divide) results, each as a NumPy ndarray.
     """
     return (mat1 + mat2, mat1 - mat2, mat1 * mat2, mat1 / mat2)
