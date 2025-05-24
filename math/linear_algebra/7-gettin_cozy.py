@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Concatenates two 2D matrices along a specified axis without using external libraries.
+Concatenates two 2D matrices along a specified axis without external library.
 """
 
 
