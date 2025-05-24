@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Module to add two 2D matrices element-wise.
+Performs element-wise addition of two 2D matrices.
 """
 
 
@@ -8,25 +8,23 @@ def add_matrices2D(mat1, mat2):
     """
     Adds two 2D matrices element-wise.
 
+    This function checks that both matrices have the same dimensions
+    and returns a new matrix containing the element-wise sum.
+    If the matrices are not the same shape, it returns None.
+
     Args:
-        mat1 (list of list of int/float): First 2D matrix.
-        mat2 (list of list of int/float): Second 2D matrix.
+        mat1 (list of list of int/float): The first 2D matrix.
+        mat2 (list of list of int/float): The second 2D matrix.
 
     Returns:
-        list of list of int/float: A new 2D matrix representing the element-wise sum.
-        None: If the input matrices are not the same shape.
+        list of list of int/float or None: The element-wise sum of the two
+        matrices, or None if they have incompatible dimensions.
+
+    Example:
+        >>> add_matrices2D([[1, 2]], [[3, 4]])
+        [[4, 6]]
     """
-    if not mat1 or not mat2:
+    if len(mat1) != len(mat2) or any(len(r1) != len(r2) for r1, r2 in zip(mat1, mat2)):
         return None
 
-    if len(mat1) != len(mat2):
-        return None
-
-    result = []
-
-    for row1, row2 in zip(mat1, mat2):
-        if len(row1) != len(row2):
-            return None
-        result.append([a + b for a, b in zip(row1, row2)])
-
-    return result
+    return [[a + b for a, b in zip(r1, r2)] for r1, r2 in zip(mat1, mat2)]
