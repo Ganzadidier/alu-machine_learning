@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
 """
-np_transpose module
-
-This module provides a function that returns the transpose of a NumPy array.
+Provides a function to transpose a matrix-like object.
 """
-
-import numpy as np
 
 
 def np_transpose(matrix):
     """
-    Returns the transpose of a NumPy array.
+    Returns the transpose of a matrix-like object.
 
-    Parameters:
-        matrix (numpy.ndarray): A NumPy array.
+    The function assumes the input supports the `.transpose()` method,
+    such as a NumPy ndarray.
+
+    Args:
+        matrix: A matrix-like object with a transpose method.
 
     Returns:
-        numpy.ndarray: The transposed array.
+        The transposed matrix.
 
     Example:
-        np_transpose(np.array([[1, 2], [3, 4]]))
-        -> array([[1, 3],
-                  [2, 4]])
+        >>> import numpy as np
+        >>> mat = np.array([[1, 2], [3, 4]])
+        >>> np_transpose(mat)
+        array([[1, 3],
+               [2, 4]])
     """
     return matrix.transpose()
