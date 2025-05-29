@@ -16,8 +16,9 @@ def determinant(matrix):
         TypeError: If matrix is not a list of lists.
         ValueError: If matrix is not square or is empty.
     """
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-                                                for row in matrix):
+    if not isinstance(matrix, list) or not all(
+        isinstance(row, list) for row in matrix
+    ):
         raise TypeError("matrix must be a list of lists")
 
     n = len(matrix)
@@ -54,8 +55,9 @@ def cofactor(matrix):
         TypeError: If matrix is not a list of lists.
         ValueError: If matrix is not square or is empty.
     """
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-                                                for row in matrix):
+    if not isinstance(matrix, list) or not all(
+        isinstance(row, list) for row in matrix
+    ):
         raise TypeError("matrix must be a list of lists")
 
     n = len(matrix)
@@ -69,8 +71,10 @@ def cofactor(matrix):
     for i in range(n):
         row_cofactors = []
         for j in range(n):
-            sub_matrix = [row[:j] + row[j + 1:]
-                          for k, row in enumerate(matrix) if k != i]
+            sub_matrix = [
+                row[:j] + row[j + 1:]
+                for k, row in enumerate(matrix) if k != i
+            ]
             minor = determinant(sub_matrix)
             sign = (-1) ** (i + j)
             row_cofactors.append(sign * minor)
@@ -106,8 +110,9 @@ def inverse(matrix):
         TypeError: If matrix is not a list of lists.
         ValueError: If matrix is not a non-empty square matrix.
     """
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-                                                for row in matrix):
+    if not isinstance(matrix, list) or not all(
+        isinstance(row, list) for row in matrix
+    ):
         raise TypeError("matrix must be a list of lists")
 
     n = len(matrix)
