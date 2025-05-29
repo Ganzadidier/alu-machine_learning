@@ -3,6 +3,7 @@
 This module contains a function to calculate the cofactor matrix of a matrix.
 """
 
+
 def determinant(matrix):
     """Helper function to calculate the determinant of a matrix."""
     if (not isinstance(matrix, list) or
