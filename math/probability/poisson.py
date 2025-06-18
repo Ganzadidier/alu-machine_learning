@@ -4,12 +4,13 @@ Module: poisson
 Defines a class Poisson that represents a Poisson distribution.
 """
 
+
 class Poisson:
     """
     Represents a Poisson distribution.
 
     Attributes:
-        lambtha (float): The expected number of occurrences in a given time frame.
+        lambtha (float): The expected number of occurrences in a given time.
     """
 
     def __init__(self, data=None, lambtha=1.):
@@ -22,7 +23,7 @@ class Poisson:
 
         Raises:
             TypeError: If data is provided and is not a list.
-            ValueError: If lambtha is not positive or data has fewer than two values.
+            ValueError: If lambtha is negative or data has fewer than two val.
         """
         if data is None:
             if lambtha <= 0:
