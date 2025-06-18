@@ -4,6 +4,8 @@ Module: poisson
 Defines a class Poisson that represents a Poisson distribution.
 """
 
+from math import exp, factorial
+
 
 class Poisson:
     """
@@ -23,7 +25,7 @@ class Poisson:
 
         Raises:
             TypeError: If data is provided and is not a list.
-            ValueError: If lambtha is negative or data has fewer than two val.
+            ValueError: If lambtha is negative or data has fewer than two.
         """
         if data is None:
             if lambtha <= 0:
@@ -35,3 +37,52 @@ class Poisson:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
+
+
+    def pmf(self, k):
+        """
+        Calculates the value of the PMF (Probability Mass Function)
+        for a given number of successes.
+
+        Args:
+            k (int): Number of successes.
+
+        Returns:
+            float: The PMF value for k.
+        """
+        try:
+            k = int(k)
+        except Exception:
+            return 0
+
+        if k < 0:
+            return 0
+
+        lamb = self.lambtha
+        return (lamb ** k) * exp(-lamb) / factorial(k)
+
+
+    def cdf(self, k):
+        """
+        Calculates the CDF (Cumulative Distribution Function)
+        for a given number of successes.
+
+        Args:
+            k (int): Number of successes.
+
+        Returns:
+            float: CDF value for k, or 0 if k is invalid.
+        """
+        try:
+            k = int(k)
+        except Exception:
+            return 0
+
+        if k < 0:
+            return 0
+
+        lamb = self.lambtha
+        cdf_value = 0
+        for i in range(k + 1):
+            cdf_value += (lamb ** i) * exp(-lamb) / factorial(i)
+        return cdf_value
