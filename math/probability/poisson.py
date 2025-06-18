@@ -4,15 +4,13 @@ Module: poisson
 Defines a class Poisson that represents a Poisson distribution.
 """
 
-from math import exp, factorial
-
 
 class Poisson:
     """
     Represents a Poisson distribution.
 
     Attributes:
-        lambtha (float): The expected number of occurrences in a given time.
+        lambtha (float): Expected number of occurrences in a given time frame.
     """
 
     def __init__(self, data=None, lambtha=1.):
@@ -24,8 +22,8 @@ class Poisson:
             lambtha (float, optional): Expected number of occurrences.
 
         Raises:
-            TypeError: If data is provided and is not a list.
-            ValueError: If lambtha is negative or data has fewer than two.
+            TypeError: If data is not a list.
+            ValueError: If lambtha is not positive or data has fewer than two values.
         """
         if data is None:
             if lambtha <= 0:
@@ -38,17 +36,15 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data) / len(data))
 
-
     def pmf(self, k):
         """
-        Calculates the value of the PMF (Probability Mass Function)
-        for a given number of successes.
+        Calculates the PMF (Probability Mass Function) for a given number of successes.
 
         Args:
             k (int): Number of successes.
 
         Returns:
-            float: The PMF value for k.
+            float: PMF value for k, or 0 if k is invalid.
         """
         try:
             k = int(k)
@@ -59,13 +55,11 @@ class Poisson:
             return 0
 
         lamb = self.lambtha
-        return (lamb ** k) * exp(-lamb) / factorial(k)
-
+        return (lamb ** k) * self._exp(-lamb) / self._factorial(k)
 
     def cdf(self, k):
         """
-        Calculates the CDF (Cumulative Distribution Function)
-        for a given number of successes.
+        Calculates the CDF (Cumulative Distribution Function) for a given number of successes.
 
         Args:
             k (int): Number of successes.
@@ -84,5 +78,39 @@ class Poisson:
         lamb = self.lambtha
         cdf_value = 0
         for i in range(k + 1):
-            cdf_value += (lamb ** i) * exp(-lamb) / factorial(i)
+            cdf_value += (lamb ** i) * self._exp(-lamb) / self._factorial(i)
         return cdf_value
+
+    def _factorial(self, n):
+        """
+        Computes the factorial of a number manually.
+
+        Args:
+            n (int): Non-negative integer.
+
+        Returns:
+            int: Factorial of n.
+        """
+        if n == 0 or n == 1:
+            return 1
+        result = 1
+        for i in range(2, n + 1):
+            result *= i
+        return result
+
+    def _exp(self, x):
+        """
+        Approximates the exponential of x using a Taylor series.
+
+        Args:
+            x (float): The exponent.
+
+        Returns:
+            float: Approximation of e^x.
+        """
+        result = 1.0
+        term = 1.0
+        for i in range(1, 50):  # 50 terms for good accuracy
+            term *= x / i
+            result += term
+        return result
