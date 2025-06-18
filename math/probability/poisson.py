@@ -23,7 +23,7 @@ class Poisson:
 
         Raises:
             TypeError: If data is not a list.
-            ValueError: If lambtha is not positive or data has fewer than two values.
+            ValueError: If lambtha is not positive or data has fewer than two.
         """
         if data is None:
             if lambtha <= 0:
@@ -38,7 +38,7 @@ class Poisson:
 
     def pmf(self, k):
         """
-        Calculates the PMF (Probability Mass Function) for a given number of successes.
+        Calculates the PMF for a given number of successes.
 
         Args:
             k (int): Number of successes.
@@ -59,7 +59,7 @@ class Poisson:
 
     def cdf(self, k):
         """
-        Calculates the CDF (Cumulative Distribution Function) for a given number of successes.
+        Calculates the CDF for a given number of successes.
 
         Args:
             k (int): Number of successes.
@@ -91,12 +91,11 @@ class Poisson:
         Returns:
             int: Factorial of n.
         """
-        if n == 0 or n == 1:
-            return 1
         result = 1
-        for i in range(2, n + 1):
+         for i in range(2, n + 1):
             result *= i
         return result
+
 
     def _exp(self, x):
         """
@@ -110,7 +109,9 @@ class Poisson:
         """
         result = 1.0
         term = 1.0
-        for i in range(1, 50):  # 50 terms for good accuracy
+        for i in range(1, 100):
             term *= x / i
+            if abs(term) < 1e-10:  # precision threshold
+                break
             result += term
         return result
